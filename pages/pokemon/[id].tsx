@@ -53,7 +53,7 @@ const PokemonPage: FC<Props> = ({ pokemon }) => {
             </Card.Header>
 
             <Card.Body>
-              <Text size={30}>Sprtes:</Text>
+              <Text size={30}>Sprites:</Text>
 
               <Container display='flex' justify='space-around'>
                 <Image
