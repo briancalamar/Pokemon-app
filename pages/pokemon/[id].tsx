@@ -58,7 +58,7 @@ const PokemonPage: FC<Props> = ({ pokemon }) => {
 
         <Grid xs={12} sm={8}>
           <Card>
-            <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Card.Header css={{ display: 'flex', justifyContent: 'space-around' }} className='responsive'>
               <Text h1 transform='capitalize'>{pokemon.name}</Text>
 
               <Button
