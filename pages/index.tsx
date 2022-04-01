@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import { GetStaticProps } from 'next';
 import { FC } from 'react';
 import { pokeApi } from '../api';

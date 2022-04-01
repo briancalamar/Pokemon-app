@@ -5,7 +5,9 @@ import React, { FC, useState } from 'react';
 import { pokeApi } from '../../api';
 import { MainLayout } from '../../components/layouts';
 import { Pokemon } from '../../interfaces';
-import { localFavorites } from '../../utils';
+import { imageCreator, localFavorites } from '../../utils';
+
+import confetti from 'canvas-confetti';
 
 interface Props {
   pokemon: Pokemon;
@@ -16,8 +18,26 @@ const PokemonPage: FC<Props> = ({ pokemon }) => {
   const [isInFavorites, setisInFavorites] = useState(localFavorites.existPokemonInLocal(pokemon.id));
 
   const onToggleFavorite = () => {
-    localFavorites.toggleFavorite(pokemon.id);
+    const poke = {
+      name: pokemon.name,
+      id: pokemon.id,
+      img: imageCreator.dreamWorldImage(pokemon.id),
+    };
+    localFavorites.toggleFavorite(poke);
     setisInFavorites(!isInFavorites);
+
+    if (isInFavorites) return;
+
+    confetti({
+      zIndex: 999,
+      particleCount: 100,
+      spread: 160,
+      angle: -100,
+      origin: {
+        x: 1,
+        y: 0,
+      },
+    });
   };
 
   return (
