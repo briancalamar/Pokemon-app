@@ -2,8 +2,9 @@ import { Button, Card, Container, Grid, Text } from '@nextui-org/react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Image from 'next/image';
 import React, { FC, useState } from 'react';
+import { pokeApi } from '../../api';
 import { MainLayout } from '../../components/layouts';
-import { Pokemon } from '../../interfaces';
+import { Pokemon, PokemonListResponse } from '../../interfaces';
 import { getPokemoInfo, imageCreator, localFavorites } from '../../utils';
 
 import confetti from 'canvas-confetti';
@@ -12,7 +13,7 @@ interface Props {
   pokemon: Pokemon;
 }
 
-const PokemonPage: FC<Props> = ({ pokemon }) => {
+const PokemonNamePage: FC<Props> = ({ pokemon }) => {
 
   const [isInFavorites, setisInFavorites] = useState(localFavorites.existPokemonInLocal(pokemon.id));
 
@@ -114,11 +115,13 @@ const PokemonPage: FC<Props> = ({ pokemon }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const pokemons151 = [...Array(151)].map((value, index) => `${index + 1}`);
+  const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
+
+  const pokemons: string[] = data.results.map((poke) => poke.name);
 
   return {
-    paths: pokemons151.map(id => ({
-      params: { id }
+    paths: pokemons.map(name => ({
+      params: { name }
     })),
     fallback: false
   };
@@ -126,13 +129,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const { id } = params as { id: string };
+  const { name } = params as { name: string };
 
   return {
     props: {
-      pokemon: await getPokemoInfo(id)
+      pokemon: await getPokemoInfo(name)
     }
   };
 };
 
-export default PokemonPage;
+export default PokemonNamePage;
