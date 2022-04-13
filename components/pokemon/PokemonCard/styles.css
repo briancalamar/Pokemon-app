@@ -1,0 +1,13 @@
+.pokemon-card {
+  max-height: 200px;
+}
+
+.pokemon-card__icon--captured {
+  color: red;
+}
+
+@media (max-width: 400px) {
+  .pokemon-card {
+    max-height: 200px;
+  }
+}
