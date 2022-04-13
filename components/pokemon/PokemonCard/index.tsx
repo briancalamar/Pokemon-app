@@ -46,7 +46,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
           </Row>
         </Card.Header>
         <Card.Body onClick={handleRedirect}>
-          <Card.Image src={img} />
+          <Card.Image src={img} height={140} width="100%"/>
         </Card.Body>
         <Card.Footer onClick={handleRedirect}>
           <Row justify='center'>
