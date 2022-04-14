@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
 
   const pokemons: SmallPokemon[] = data.results.map((poke, index) => {
-    const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${index + 1}.svg`;
+    const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${index + 1}.gif`;
 
     return {
       ...poke,
