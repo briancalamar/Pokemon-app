@@ -123,7 +123,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: pokemons.map(name => ({
       params: { name }
     })),
-    fallback: false
+    fallback: 'blocking'
   };
 };
 
@@ -131,10 +131,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { name } = params as { name: string };
 
+  const pokemon = await getPokemoInfo(name);
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    };
+  }
+
   return {
     props: {
-      pokemon: await getPokemoInfo(name)
-    }
+      pokemon,
+    },
+    // Next.js hara una regeneracion de las paginas cada 24 horas
+    revalidate: 8400,
   };
 };
 
