@@ -14,14 +14,14 @@ const toggleFavorite = ( poke: SmallPokemon) => {
   localStorage.setItem('favorites', JSON.stringify( favorites ));
 };
 
-const existPokemonInLocal = ( id: number ): boolean => {
+const existPokemonInLocal = ( id: number ): boolean | null => {
 
   if( typeof window === 'undefined') return false;
 
   const favorites: SmallPokemon[] = JSON.parse( localStorage.getItem('favorites') || '[]');
   const trueOrFalse = !!favorites.find( (pokemon: SmallPokemon) => pokemon.id === id);
 
-  return trueOrFalse;
+  return trueOrFalse ? true : null;
 };
 
 const pokemons = (): SmallPokemon[] => {

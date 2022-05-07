@@ -21,6 +21,9 @@ export const MainLayout: FC<props> = ({ children, title }) => {
 
       <main style={{
         padding: '0px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}>
         { children }
       </main>

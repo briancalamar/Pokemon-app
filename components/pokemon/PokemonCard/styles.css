@@ -1,9 +1,7 @@
+@import '../../ui/BallFavorite/styles';
+
 .pokemon-card {
   max-height: 200px;
-}
-
-.pokemon-card__icon--captured {
-  color: red;
 }
 
 @media (max-width: 400px) {
